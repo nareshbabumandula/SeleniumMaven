@@ -22,7 +22,7 @@ public class LaunchBrowser {
 		System.out.println(driver.getCurrentUrl());
 		System.out.println(driver.getTitle());
 		System.out.println(driver.getWindowHandle());
-		Thread.sleep(4000);
+		Thread.sleep(3000);
 		driver.quit();
 
 	}
