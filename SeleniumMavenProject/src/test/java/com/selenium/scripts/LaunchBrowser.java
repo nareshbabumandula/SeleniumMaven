@@ -21,6 +21,7 @@ public class LaunchBrowser {
 		driver.get("https://www.mycontactform.com/");
 		System.out.println(driver.getCurrentUrl());
 		System.out.println(driver.getTitle());
+		System.out.println(driver.getWindowHandle());
 		Thread.sleep(3000);
 		driver.quit();
 
