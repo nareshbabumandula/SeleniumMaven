@@ -19,6 +19,8 @@ public class LaunchBrowser {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("https://www.mycontactform.com/");
+		System.out.println(driver.getCurrentUrl());
+		System.out.println(driver.getTitle());
 		Thread.sleep(3000);
 		driver.quit();
 
