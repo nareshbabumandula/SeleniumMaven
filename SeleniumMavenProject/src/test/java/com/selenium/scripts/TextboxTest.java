@@ -7,6 +7,7 @@ import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -20,7 +21,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class MultipleWindowsTest {
+public class TextboxTest {
 
 	static ExtentTest test;
 	static ExtentReports report;
@@ -31,7 +32,7 @@ public class MultipleWindowsTest {
 	void launchBrowser() throws IOException {
 
 		report = new ExtentReports(System.getProperty("user.dir") + "/Extent Reports/ExtentReportResults.html");
-		test = report.startTest("Multiple Windows Handling");
+		test = report.startTest("Textbox Methods");
 		
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
@@ -40,43 +41,23 @@ public class MultipleWindowsTest {
 	}
 
 	@Test
-	void handleMultipleWindows() throws IOException, InterruptedException {
+	void handleTextbox() throws IOException, InterruptedException {
 		driver.get(ReadPropertyUtil.getProperty("url"));
+		WebElement username = driver.findElement(By.id("user"));
+		username.sendKeys("naresh");
+		//<input name="user" type="text" class="txt_log" id="user" value="" tabindex="1">
+		System.out.println(username.getAttribute("name"));
+		System.out.println(username.getAttribute("type"));
+		System.out.println(username.getAttribute("class"));
+		System.out.println(username.getAttribute("id"));
+		System.out.println(username.getAttribute("value"));
+		System.out.println(username.getAttribute("tabindex"));
+		System.out.println(username.getTagName());
+		
+		//driver.findElement(By.cssSelector("input[name*='user']")).sendKeys("vignath");
+		Thread.sleep(3000);
 				
-		// Parent Window Session ID
-		String mainWindow = driver.getWindowHandle();
-		System.out.println(mainWindow);
-		System.out.println(driver.getWindowHandles());
-		String n = Keys.chord(Keys.CONTROL,Keys.ENTER);
-		driver.findElement(By.linkText("Sample Forms")).sendKeys(n);
-		System.out.println(driver.getWindowHandles());
-		//driver.switchTo().newWindow(WindowType.TAB);
-		String n1 = Keys.chord(Keys.CONTROL,Keys.ENTER);
-		driver.findElement(By.linkText("Features")).sendKeys(n1);
-		System.out.println(driver.getWindowHandles());
-		Set<String> windows = driver.getWindowHandles();
-		
-		Iterator<String> iter = windows.iterator();
-		
-		while(iter.hasNext()) {
-			String child = iter.next();
-			driver.switchTo().window(child);
-			System.out.println(driver.getWindowHandle() + " with browser title as : " + driver.getTitle());
-			String strTitle = driver.getTitle();
-			if(strTitle.contains("Sample Email Forms")) {
-				driver.findElement(By.id("subject")).sendKeys("Test Subject");
-			}
-			Thread.sleep(3000);
-		}
-		//driver.findElement(By.id("subject")).sendKeys("Test Subject123");
-		driver.switchTo().window(mainWindow); // Switch back to parent window
-		
-		test.log(LogStatus.PASS, "Successfully performed actions on a browser..!");
-		
-		
-		
-		
-
+		test.log(LogStatus.PASS, "Successfully performed actions on a textbox..!");
 	}
 
 
