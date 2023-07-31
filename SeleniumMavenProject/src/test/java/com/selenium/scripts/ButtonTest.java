@@ -1,20 +1,27 @@
 package com.selenium.scripts;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class TextboxTest {
+public class ButtonTest {
 
 	static ExtentTest test;
 	static ExtentReports report;
@@ -34,24 +41,14 @@ public class TextboxTest {
 	}
 
 	@Test
-	void handleTextbox() throws IOException, InterruptedException {
+	void handleButton() throws IOException, InterruptedException {
 		driver.get(ReadPropertyUtil.getProperty("url"));
-		WebElement username = driver.findElement(By.id("user"));
-		username.sendKeys("naresh"); // Enter data in textbox
-		//<input name="user" type="text" class="txt_log" id="user" value="" tabindex="1">
-		System.out.println(username.getAttribute("name"));
-		System.out.println(username.getAttribute("type"));
-		System.out.println(username.getAttribute("class"));
-		System.out.println(username.getAttribute("id"));
-		System.out.println(username.getAttribute("value"));
-		System.out.println(username.getAttribute("tabindex"));
-		System.out.println(username.getTagName());
-		username.clear(); // Clear text from the textbox
-		
-		
-		//driver.findElement(By.cssSelector("input[name*='user']")).sendKeys("vignath");
+		WebElement login = driver.findElement(By.name("btnSubmit"));
+		System.out.println(login.isDisplayed());
+		System.out.println(login.isEnabled());
+		login.click();
 		Thread.sleep(3000);
-		test.log(LogStatus.PASS, "Successfully performed actions on a textbox..!");
+		test.log(LogStatus.PASS, "Successfully performed actions on a button..!");
 	}
 
 
