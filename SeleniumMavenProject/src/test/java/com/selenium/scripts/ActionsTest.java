@@ -33,7 +33,7 @@ public class ActionsTest {
 
 	@BeforeClass
 	void launchBrowser() throws IOException {
-
+		// Create Extent Report
 		report = new ExtentReports(System.getProperty("user.dir") + "/Extent Reports/ExtentReportResults.html");
 		test = report.startTest("Actions Methods");
 		
@@ -48,7 +48,6 @@ public class ActionsTest {
 		driver.get("https://jqueryui.com/");
 		
 		WebElement menu = driver.findElement(By.linkText("Contribute"));
-		
 		Actions action = new Actions(driver);
 		action.moveToElement(menu).perform();
 		//action.click(menu).perform(); // Newly added
@@ -68,16 +67,13 @@ public class ActionsTest {
 		// dragAndDrop
 		driver.switchTo().defaultContent();
 		driver.findElement(By.linkText("Droppable")).click();
-		driver.switchTo().frame(0);
+		driver.switchTo().frame(0);  // Switch to frame based on frame index
 		
 		WebElement source = driver.findElement(By.id("draggable"));
 		WebElement destination = driver.findElement(By.id("droppable"));
 		action.dragAndDrop(source, destination).perform();
 		Thread.sleep(3000);
-		
-		
 		test.log(LogStatus.PASS, "Successfully performed actions using methods of actions class..!");
-		
 	}
 
 
@@ -88,7 +84,5 @@ public class ActionsTest {
 		test.log(LogStatus.PASS, "Closed the browser..!");
 		report.endTest(test);
 		report.flush();
-
 	}
-
 }
